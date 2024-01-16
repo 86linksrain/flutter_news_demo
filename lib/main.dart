@@ -1,0 +1,35 @@
+
+import 'package:flutter/material.dart';
+import 'main_home.dart';
+import 'package:demo_common/main_router.dart';
+import 'package:demo_news/news_router.dart';
+import 'package:demo_discover/discover_router.dart';
+import 'package:demo_mine/mine_router.dart';
+import 'package:get/get.dart';
+
+void main() {
+  // 注册routes
+  MainRouter().initRoutes(
+      [NewsRouter.routes, DiscoverRouter.routes, MineRouter.routes]);
+  // 启动
+  runApp(const MyApp());
+  // 建议用get但不建议整体用GetMaterialApp
+  // runApp(const GetMaterialApp(home: MyApp()));
+}
+
+class MyApp extends StatelessWidget {
+  const MyApp({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      theme: ThemeData(
+        primarySwatch: Colors.blue,
+      ),
+      navigatorKey: MainRouter().navigatorKey,
+      routes: MainRouter().routes,
+      onGenerateRoute: MainRouter().generateRoute,
+      home: HomePage(),
+    );
+  }
+}
