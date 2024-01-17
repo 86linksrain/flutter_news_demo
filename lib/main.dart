@@ -1,11 +1,9 @@
 import 'package:flutter/material.dart';
 import 'main_home.dart';
 import 'package:demo_common/common_module.dart';
-// import 'package:demo_common/main_router.dart';
 import 'package:demo_news/news_module.dart';
-// import 'package:demo_news/news_router.dart';
-import 'package:demo_discover/discover_router.dart';
-import 'package:demo_mine/mine_router.dart';
+import 'package:demo_discover/discover_module.dart';
+import 'package:demo_mine/mine_module.dart';
 import 'package:get/get.dart';
 
 void main() {
@@ -24,9 +22,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GetMaterialApp(
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
-      ),
+      theme: Themes.park,
       navigatorKey: MainRouter().navigatorKey,
       routes: MainRouter().routes,
       onUnknownRoute: MainRouter().nullRoute,

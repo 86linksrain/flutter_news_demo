@@ -1,7 +1,10 @@
+import 'package:demo_discover/discover_module.dart';
+import 'package:demo_mine/mine_module.dart';
+import 'package:demo_news/news_module.dart';
 import 'package:flutter/material.dart';
-import 'package:demo_news/news_home.dart';
-import 'package:demo_discover/discover_home.dart';
-import 'package:demo_mine/mine_home.dart';
+// import 'package:demo_news/news_home.dart';
+// import 'package:demo_discover/discover_home.dart';
+// import 'package:demo_mine/mine_home.dart';
 
 class HomePage extends StatefulWidget {
   @override
