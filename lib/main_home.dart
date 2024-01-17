@@ -20,7 +20,7 @@ class _HomePageState extends State<HomePage> {
   ];
 
   // 4个按钮
-  final List<BottomNavigationBarItem> _items = [
+  final List<BottomNavigationBarItem> _items = const [
     BottomNavigationBarItem(
       icon: Icon(Icons.home),
       label: "新闻",
@@ -58,24 +58,16 @@ class _HomePageState extends State<HomePage> {
     return Scaffold(
       body: PageView(
         controller: _pageController,
+        physics: const NeverScrollableScrollPhysics(), // 禁止滑动
         children: _pageList,
-        physics: NeverScrollableScrollPhysics(), // 禁止滑动
       ),
-      bottomNavigationBar: Theme(
-        // 去除水波纹
-        data: ThemeData(
-          brightness: Brightness.light,
-          splashColor: Colors.transparent,
-          highlightColor: Colors.transparent,
-        ),
-        child: BottomNavigationBar(
-          selectedFontSize: 12.0,
-          unselectedFontSize: 12.0,
-          type: BottomNavigationBarType.fixed,
-          items: _items,
-          currentIndex: _currentIndex,
-          onTap: onTap,
-        ),
+      bottomNavigationBar: BottomNavigationBar(
+        selectedFontSize: 12.0,
+        unselectedFontSize: 12.0,
+        type: BottomNavigationBarType.fixed,
+        items: _items,
+        currentIndex: _currentIndex,
+        onTap: onTap,
       ),
     );
   }

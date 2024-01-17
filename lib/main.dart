@@ -8,8 +8,12 @@ import 'package:get/get.dart';
 
 void main() {
   // 注册routes
-  MainRouter().initRoutes(
-      [NewsRouter.routes, DiscoverRouter.routes, MineRouter.routes]);
+  MainRouter().initRoutes([
+    NewsRouter.routes,
+    DiscoverRouter.routes,
+    MineRouter.routes,
+    CommonRouter.routes
+  ]);
   // 启动
   runApp(const MyApp());
   // 建议用get但不建议整体用GetMaterialApp
