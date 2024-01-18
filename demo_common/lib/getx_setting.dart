@@ -1,3 +1,11 @@
+/*
+ * @Author: rain zwen@86links.com
+ * @Date: 2024-01-17 15:56:25
+ * @LastEditors: rain zwen@86links.com
+ * @LastEditTime: 2024-01-18 16:46:05
+ * @FilePath: /demo/demo_common/lib/getx_setting.dart
+ * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
+ */
 import 'package:demo_common/theme.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';

@@ -2,13 +2,12 @@
  * @Author: rain zwen@86links.com
  * @Date: 2024-01-15 20:12:30
  * @LastEditors: rain zwen@86links.com
- * @LastEditTime: 2024-01-16 17:51:04
+ * @LastEditTime: 2024-01-17 20:26:28
  * @FilePath: /demo/lib/main_router.dart
  * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
  */
 // import 'package:demo_common/common_module.dart';
 import 'package:demo_common/null_router.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class MainRouter {
@@ -30,7 +29,12 @@ class MainRouter {
   Map<String, WidgetBuilder> routes = {};
 
   // 拦截器
-  final RouteFactory generateRoute = (settings) {};
+  // final RouteFactory generateRoute = (settings) {
+  //   // 路由拦截器
+  //    return MaterialPageRoute(builder: (ctx) {
+  //     return NullRouter();
+  //   });
+  // };
   final RouteFactory nullRoute = (settings) {
     print('undefined route');
     return MaterialPageRoute(builder: (ctx) {
