@@ -1,4 +1,4 @@
-import 'package:get/get.dart';
+import 'package:demo_common/common_module.dart';
 
 import 'index.dart';
 

@@ -2,12 +2,12 @@
  * @Author: rain zwen@86links.com
  * @Date: 2024-01-18 15:33:28
  * @LastEditors: rain zwen@86links.com
- * @LastEditTime: 2024-01-18 15:48:35
+ * @LastEditTime: 2024-01-20 11:14:08
  * @FilePath: /demo/demo_auth/lib/auth_home/view.dart
  * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
  */
+import 'package:demo_common/common_module.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 
 import 'index.dart';
 
@@ -16,28 +16,24 @@ class AuthHomePage extends GetView<AuthHomeController> {
 
   // 主视图
   Widget _buildView() {
-    return Column(
+    return ListView(
       children: [
-        const Row(
-          children: [
-            Text('名字'),
-            TextField(
-              decoration: InputDecoration(hintText: '请输入用户名字'),
-            )
-          ],
+        Text('名字'),
+        TextField(
+          decoration: InputDecoration(hintText: '请输入用户名字'),
         ),
         const SizedBox(
           height: 40,
         ),
-        const Row(
-          children: [
-            Text('密码'),
-            TextField(
-              decoration: InputDecoration(hintText: '请输入用户密码'),
-            )
-          ],
+        Text('密码'),
+        TextField(
+          decoration: InputDecoration(hintText: '请输入用户密码'),
+        ),
+        const SizedBox(
+          height: 40,
         ),
         Row(
+          mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: [
             OutlinedButton(
                 onPressed: () {

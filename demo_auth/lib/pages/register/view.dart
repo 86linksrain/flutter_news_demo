@@ -2,12 +2,12 @@
  * @Author: rain zwen@86links.com
  * @Date: 2024-01-18 15:47:30
  * @LastEditors: rain zwen@86links.com
- * @LastEditTime: 2024-01-18 15:47:46
+ * @LastEditTime: 2024-01-18 20:01:03
  * @FilePath: /demo/demo_auth/lib/pages/register/view.dart
  * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
  */
+import 'package:demo_common/common_module.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 
 import 'index.dart';
 
