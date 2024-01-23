@@ -1,13 +1,13 @@
-import 'package:demo_auth/model/user.dart';
+import 'package:demo_common/model/user.dart';
 
 class UserService {
   /// 登录
   static Future<UserModel> login({
-    required Map params,
+    required Map<String, dynamic> params,
   }) async {
     await Future.delayed(const Duration(seconds: 1));
     params.addAll({'token': '1234-5678-90ab-cdef'});
-    return UserModel.fromJson(params as Map<String, dynamic>);
+    return UserModel.fromJson(params);
   }
 
   /// 注册

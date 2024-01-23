@@ -20,6 +20,7 @@ class AuthHomePage extends GetView<AuthHomeController> {
       children: [
         Text('名字'),
         TextField(
+          controller: controller.nameController,
           decoration: InputDecoration(hintText: '请输入用户名字'),
         ),
         const SizedBox(
@@ -27,6 +28,7 @@ class AuthHomePage extends GetView<AuthHomeController> {
         ),
         Text('密码'),
         TextField(
+          controller: controller.pwdController,
           decoration: InputDecoration(hintText: '请输入用户密码'),
         ),
         const SizedBox(
@@ -38,6 +40,7 @@ class AuthHomePage extends GetView<AuthHomeController> {
             OutlinedButton(
                 onPressed: () {
                   print('登录');
+                  controller.handleLogin();
                 },
                 child: Text('登录')),
             OutlinedButton(
