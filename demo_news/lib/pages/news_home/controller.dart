@@ -29,7 +29,7 @@ class NewsHomeController extends GetxController {
     print('用户信息');
     print(Get.isRegistered<UserStore>());
     print(userStore.isLogin);
-    print(userStore.profile.name);
+    print(userStore.profile.toJson());
     loginInfo = UserStore.to.profile;
     isLogin = UserStore.to.isLogin;
   }

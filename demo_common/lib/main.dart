@@ -1,4 +1,12 @@
+import 'dart:io';
+
+import 'package:demo_common/util/file.dart';
+import 'package:demo_common/util/permission.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:permission_handler/permission_handler.dart';
+
+import 'util/image.dart';
 
 void main() {
   runApp(const MyApp());
@@ -10,7 +18,7 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return GetMaterialApp(
       title: 'Flutter Demo',
       theme: ThemeData(
         // This is the theme of your application.
@@ -55,71 +63,165 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  int _counter = 0;
-
-  void _incrementCounter() {
-    setState(() {
-      // This call to setState tells the Flutter framework that something has
-      // changed in this State, which causes it to rerun the build method below
-      // so that the display can reflect the updated values. If we changed
-      // _counter without calling setState(), then the build method would not be
-      // called again, and so nothing would appear to happen.
-      _counter++;
-    });
-  }
+  String? imagepath;
+  File? file;
 
   @override
   Widget build(BuildContext context) {
-    // This method is rerun every time setState is called, for instance as done
-    // by the _incrementCounter method above.
-    //
-    // The Flutter framework has been optimized to make rerunning build methods
-    // fast, so that you can just rebuild anything that needs updating rather
-    // than having to individually change instances of widgets.
-    return Scaffold(
-      appBar: AppBar(
-        // TRY THIS: Try changing the color here to a specific color (to
-        // Colors.amber, perhaps?) and trigger a hot reload to see the AppBar
-        // change color while the other colors stay the same.
-        backgroundColor: Theme.of(context).colorScheme.inversePrimary,
-        // Here we take the value from the MyHomePage object that was created by
-        // the App.build method, and use it to set our appbar title.
-        title: Text(widget.title),
-      ),
-      body: Center(
-        // Center is a layout widget. It takes a single child and positions it
-        // in the middle of the parent.
-        child: Column(
-          // Column is also a layout widget. It takes a list of children and
-          // arranges them vertically. By default, it sizes itself to fit its
-          // children horizontally, and tries to be as tall as its parent.
-          //
-          // Column has various properties to control how it sizes itself and
-          // how it positions its children. Here we use mainAxisAlignment to
-          // center the children vertically; the main axis here is the vertical
-          // axis because Columns are vertical (the cross axis would be
-          // horizontal).
-          //
-          // TRY THIS: Invoke "debug painting" (choose the "Toggle Debug Paint"
-          // action in the IDE, or press "p" in the console), to see the
-          // wireframe for each widget.
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            const Text(
-              'You have pushed the button this many times:',
+    return PopScope(
+      canPop: false,
+      child: Scaffold(
+        appBar: AppBar(
+          backgroundColor: Theme.of(context).colorScheme.inversePrimary,
+          title: Text(widget.title),
+        ),
+        body: Column(
+          children: [
+            file == null
+                ? const Text('占位')
+                : Image.file(file!, width: 200, height: 200),
+            Container(
+              decoration:
+                  BoxDecoration(border: Border.all(color: Colors.black)),
+              child: Wrap(
+                children: <Widget>[
+                  TextButton(
+                      onPressed: () {
+                        ImageUtil().takePhoto().then((value) {
+                          print('object');
+                          setState(() {
+                            file = value;
+                          });
+                        });
+                      },
+                      child: const Text('拍照')),
+                  TextButton(
+                      onPressed: () {
+                        ImageUtil().pickImage().then((value) {
+                          print('object');
+                          setState(() {
+                            file = value;
+                          });
+                        });
+                      },
+                      child: const Text('单选图片')),
+                  TextButton(
+                      onPressed: () {
+                        ImageUtil().pickImageAndVideo().then((value) {
+                          value?.map((e) => print(e.path));
+                        });
+                      },
+                      child: const Text('多种类型图片')),
+                  TextButton(
+                      onPressed: () {
+                        ImageUtil().pickManyImages().then((value) {
+                          value?.map((e) => print(e.path));
+                        });
+                      },
+                      child: const Text('多选图片')),
+                  TextButton(
+                      onPressed: () {
+                        ImageUtil().selectBottomSheet().then((value) {
+                          setState(() {
+                            file = value;
+                          });
+                        });
+                      },
+                      child: const Text('弹出工具')),
+                ],
+              ),
             ),
-            Text(
-              '$_counter',
-              style: Theme.of(context).textTheme.headlineMedium,
+            Container(
+              decoration:
+                  BoxDecoration(border: Border.all(color: Colors.yellow)),
+              child: Wrap(
+                children: <Widget>[
+                  TextButton(
+                      onPressed: () {
+                        FileUtil()
+                            .filePicker(image: true, video: true)
+                            .then((value) {
+                          print(value);
+                        });
+                      },
+                      child: const Text('选文件')),
+                  TextButton(
+                      onPressed: () {
+                        FileUtil().fileImagePicker().then((value) {});
+                      },
+                      child: const Text('选图片文件')),
+                  TextButton(
+                      onPressed: () {
+                        FileUtil().fileImageMultiplePicker().then((value) {});
+                      },
+                      child: const Text('选多个图片文件')),
+                  TextButton(
+                      onPressed: () {
+                        FileUtil().fileVideoPicker().then((value) {});
+                      },
+                      child: const Text('选视频文件')),
+                ],
+              ),
+            ),
+            Container(
+              decoration: BoxDecoration(border: Border.all(color: Colors.red)),
+              child: Wrap(
+                children: <Widget>[
+                  TextButton(
+                      onPressed: () {
+                        PermissionUtil().getCameraPermission().then((value) {
+                          print(value ? '有权限' : '没权限');
+                        });
+                      },
+                      child: const Text('获取相机权限')),
+                  TextButton(
+                      onPressed: () {
+                        PermissionUtil().getPhotosPermission().then((value) {
+                          print(value ? '有权限' : '没权限');
+                        });
+                      },
+                      child: const Text('获取相册权限')),
+                  TextButton(
+                      onPressed: () {
+                        PermissionUtil()
+                            .getCameraAndPhotosPermission()
+                            .then((value) {
+                          print('相机' +
+                              (value[0] ? '有权限' : '没权限') +
+                              '相册' +
+                              (value[1] ? '有权限' : '没权限'));
+                        });
+                      },
+                      child: const Text('获取相机相册权限')),
+                  TextButton(
+                      onPressed: () {
+                        PermissionUtil().getLocationPermission().then((value) {
+                          print(value ? '有权限' : '没权限');
+                        });
+                      },
+                      child: const Text('获取定位权限')),
+                  TextButton(
+                      onPressed: () {
+                        PermissionUtil().getStoragePermission().then((value) {
+                          print(value ? '有权限' : '没权限');
+                        });
+                      },
+                      child: const Text('获取存储权限')),
+                  TextButton(
+                      onPressed: () {
+                        PermissionUtil()
+                            .getNotificationPermission()
+                            .then((value) {
+                          print(value ? '有权限' : '没权限');
+                        });
+                      },
+                      child: const Text('获取通知权限'))
+                ],
+              ),
             ),
           ],
         ),
       ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: _incrementCounter,
-        tooltip: 'Increment',
-        child: const Icon(Icons.add),
-      ), // This trailing comma makes auto-formatting nicer for build methods.
     );
   }
 }

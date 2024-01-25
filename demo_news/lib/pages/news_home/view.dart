@@ -1,4 +1,5 @@
 import 'package:demo_common/store/user.dart';
+import 'package:demo_common/util/image.dart';
 import 'package:flutter/material.dart';
 import 'package:demo_common/common_module.dart';
 
@@ -28,7 +29,14 @@ class NewsHomePage extends GetView<NewsHomeController> {
           Image.asset('packages/demo_common/assets/images/alert_twocards.png'),
           Obx(() => Text(controller.userStore.profile.name ?? '')),
           // Obx(() => Text(UserStore.to.profile.name ?? '--')),
-          Text(controller.getUserName())
+          Text(controller.getUserName()),
+          TextButton(
+              onPressed: () {
+                ImageUtil().pickImage().then((value) {
+                  print(value);
+                });
+              },
+              child: const Text('单选图片')),
         ],
       ),
     );
